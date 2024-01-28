@@ -1,8 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+
+import 'home.dart';
 void main() {
   runApp(
     MaterialApp(
@@ -192,57 +193,41 @@ class _myappState extends State<myapp> {
     );
   }
 
+
   void login()async{
-    try{
-      final res = await post(Uri.parse('https://reqres.in/api/login'),
-          body: {
-            'email' : email.value.text,
-            'password' : pass.value.text,
-          });
-
-      var data = jsonDecode(res.body);
-      print(res.statusCode);
-      print(data);
-      if(res.statusCode == 200){
-
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SecondPage())
-        );
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Đăng nhập thành công'),
-          ),
-        );
-      }else{
-        Get.snackbar('Login Failed', data['error']);
-      }
-    }catch(e){
-      Get.snackbar('Exception', e.toString());
-    }
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Quay lại trang trước đó khi nút được nhấn
-            Navigator.pop(context);
-          },
-          child: const Text('Quay Lại'),
-        ),
-
-
-      ),
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage())
     );
+    // try{
+    //   final res = await post(Uri.parse('https://reqres.in/api/login'),
+    //       body: {
+    //         'email' : email.value.text,
+    //         'password' : pass.value.text,
+    //       });
+    //
+    //   var data = jsonDecode(res.body);
+    //   print(res.statusCode);
+    //   print(data);
+    //   if(res.statusCode == 200){
+    //
+    //
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       const SnackBar(
+    //         content: Text('Đăng nhập thành công'),
+    //       ),
+    //     );
+    //   }else{
+    //     Get.snackbar('Login Failed', data['error']);
+    //   }
+    // }catch(e){
+    //   Get.snackbar('Exception', e.toString());
+    // }
   }
 }
+
+
+
 
 
 
